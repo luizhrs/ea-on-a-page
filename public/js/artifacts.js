@@ -19,6 +19,12 @@ function refreshIcons(container) {
   }
 }
 
+// Artifact view state
+let selId = null;
+let cmpId = null;
+let cProc = null;
+let cRef = null;
+
 /* ═══ GRID ═══ */
 function rg(){
   const sq=$('si').value.toLowerCase(),ff=$('ff').value,fe=$('fe').value,flv=$('flc').value;

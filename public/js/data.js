@@ -317,9 +317,3 @@ const PROCS=[
   ["delivery","Initiative Delivery","Deliver specific IT solutions using Outlines and Designs. A sequential process (initiation → implementation) tied to project lifecycles.","Outlines, Designs, Patterns"]
 ];
 const REFINE=[["business","Business-focused"],["it","IT-focused"],["permanent","Permanent"],["temporary","Temporary"],["essential","Essential only"]];
-
-let curV='home',prevV='home',selId=null,cmpId=null,cProc=null,cRef=null;
-const ga=id=>DA.find(a=>a.id===id);
-const fl=fo=>fo==='both'?'Business + IT':fo==='business'?'Business':'IT';
-const esClass=es=>`es-${es}`;
-
