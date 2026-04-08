@@ -18,7 +18,7 @@ body{
   --vBg:#faf9f7;--vS:#d6d1ca;--vN:#f0ede9;--vT:#7a746d;
   --sh:0 1px 3px rgba(0,0,0,.04);
   background:var(--bg);color:var(--tx);
-  font-family:'Satoshi',system-ui,sans-serif;font-size:15px;
+  font-family:'Satoshi',system-ui,sans-serif;font-size:17px;
   -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;
 }
 
@@ -134,8 +134,9 @@ footer{text-align:center;padding:20px 24px;font-size:12px;color:var(--tx4);borde
 
 /* === FONT SIZE SLIDER === */
 .fs-bar{position:fixed;bottom:0;left:0;right:0;z-index:90;background:var(--hd);backdrop-filter:blur(16px);border-top:1px solid var(--bd);padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:12px}
+@media(max-width:600px){.fs-bar{padding:10px 24px 28px}}
 .fs-bar label{font-size:11px;color:var(--tx3);font-weight:500;white-space:nowrap}
-.fs-bar input[type=range]{width:120px;accent-color:var(--ac);cursor:pointer}
+.fs-bar input[type=range]{width:120px;accent-color:var(--ac);cursor:pointer;height:28px}
 .fs-bar .fs-val{font-size:11px;color:var(--tx4);min-width:32px;text-align:center}
 
 /* === FOOTER === */
@@ -223,8 +224,6 @@ footer{padding:32px 24px 60px;border-top:1px solid var(--bd);text-align:center}
 </main>
 
 <footer>
-  <div class="ftr-main">Built on Svyatoslav Kotusev's <a href="https://eaonapage.com" target="_blank" rel="noopener">EA on a Page</a> framework (v2.2)</div>
-  <div class="ftr-sub">Artifact classifications based on the <a href="https://www.sciencedirect.com/science/article/abs/pii/S0950584922000593" target="_blank" rel="noopener">CSVLOD taxonomy</a> · Kotusev et al., Information &amp; Software Technology, 2022</div>
   <div class="ftr-author">
     <span>Built by Luiz Santana</span>
     <div class="ftr-icons">
@@ -234,6 +233,8 @@ footer{padding:32px 24px 60px;border-top:1px solid var(--bd);text-align:center}
     </div>
     <span class="ftr-note">Open source · No data collected</span>
   </div>
+  <div class="ftr-main" style="margin-top:14px">Built on Svyatoslav Kotusev's <a href="https://eaonapage.com" target="_blank" rel="noopener">EA on a Page</a> framework (v2.2)</div>
+  <div class="ftr-sub">Artifact classifications based on the <a href="https://www.sciencedirect.com/science/article/abs/pii/S0950584922000593" target="_blank" rel="noopener">CSVLOD taxonomy</a> · Kotusev et al., Information &amp; Software Technology, 2022</div>
 </footer>
 
 <div class="fs-bar">
