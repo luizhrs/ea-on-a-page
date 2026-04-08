@@ -341,12 +341,12 @@ body.dark .es-common{background:rgba(74,109,138,.18);color:#7aaac8}
   .tb{margin-left:4px;flex-shrink:0}
 }
 
-/* Sub-nav */
-.artifacts-subnav{background:var(--sf2);border-bottom:1px solid var(--bd)}
-.artifacts-subnav .asi{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;gap:2px;height:36px;align-items:center}
-@media(max-width:700px){.artifacts-subnav .asi{padding:0 12px}}
-.mnb{padding:4px 12px;font-size:12px;font-weight:500;color:var(--tx3);background:none;border:none;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;-webkit-tap-highlight-color:transparent}
-.mnb.on{color:var(--tx);background:var(--bd)}
+/* Inline artifact sub-nav (appears in main header next to Artifacts) */
+.art-subnav{display:none;align-items:center;gap:1px}
+.art-subnav-sep{width:1px;height:14px;background:var(--bd);margin:0 4px;flex-shrink:0}
+.snb{padding:5px 10px;font-size:12px;font-weight:500;color:var(--tx4);background:none;border:none;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;-webkit-tap-highlight-color:transparent;white-space:nowrap}
+.snb:hover{color:var(--tx);background:var(--sf2)}
+.snb.on{color:var(--tx);background:var(--sf2);font-weight:600}
 
 /* Main layout padding on mobile */
 @media(max-width:700px){

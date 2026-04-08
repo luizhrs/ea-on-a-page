@@ -18,15 +18,14 @@
       <button class="nb" id="nfu" onclick="nav('function')">Function</button>
       <button class="nb" id="nma" onclick="nav('maturity')">Maturity</button>
       <button class="nb" id="nart" onclick="nav('grid')">Artifacts</button>
+      <!-- Artifact sub-nav: inline, hidden until Artifacts is active -->
+      <div class="art-subnav" id="art-subnav" style="display:none">
+        <span class="art-subnav-sep"></span>
+        <button class="snb" id="asn-grid" onclick="nav('grid')">Explore</button>
+        <button class="snb" id="asn-map" onclick="nav('map')">Map</button>
+        <button class="snb" id="asn-find" onclick="nav('chooser')">Find</button>
+      </div>
       <button class="tb" id="tb" onclick="tog()">◐</button>
-    </div>
-  </div>
-  <!-- Artifacts sub-navigation (shown only when in Explore / Map / Find) -->
-  <div class="artifacts-subnav" id="artifacts-subnav" style="display:none">
-    <div class="asi">
-      <button class="mnb" id="asn-grid" onclick="nav('grid')">Explore</button>
-      <button class="mnb" id="asn-map" onclick="nav('map')">Map</button>
-      <button class="mnb" id="asn-find" onclick="nav('chooser')">Find</button>
     </div>
   </div>
 </header>

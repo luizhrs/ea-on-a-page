@@ -44,9 +44,9 @@ function nav(v) {
     if (nart) nart.classList.add('on');
   }
 
-  // Show/hide artifacts sub-nav
-  const subnav = $('artifacts-subnav');
-  if (subnav) subnav.style.display = ARTIFACTS_VIEWS.includes(v) ? '' : 'none';
+  // Show/hide inline artifact sub-nav
+  const subnav = $('art-subnav');
+  if (subnav) subnav.style.display = ARTIFACTS_VIEWS.includes(v) ? 'flex' : 'none';
 
   // Highlight sub-nav tab
   const subNavMap = {grid:'asn-grid', map:'asn-map', chooser:'asn-find'};

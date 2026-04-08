@@ -42,7 +42,7 @@ function rg(){
     h+=`<div class="gs"><div class="gh"><div class="gd" style="background:${fm.c}"></div><h2>${fm.l}</h2><span>${fm.d}</span></div><div class="cg">`;
     const ES_ORD={essential:0,popular:1,common:2,uncommon:3};
     items.sort((a,b)=>(ES_ORD[a.es]??9)-(ES_ORD[b.es]??9));
-    items.forEach(a=>{const fc=FM[a.f];h+=`<div class="cd" onclick="od('${a.id}')"><div class="tp"><span class="ic">${lucideIcon(a.ic, fc.c)}</span><span class="lb ${esClass(a.es)}">${a.es}</span></div><h3>${a.n}</h3><p>${a.s}</p><div class="mt"><span class="lb lb-f" style="color:${fc.c};border-color:${fc.c}44">${fc.l}</span><span class="lb lb-m">${fl(a.fo)}</span></div></div>`});
+    items.forEach(a=>{const fc=FM[a.f];h+=`<div class="cd" onclick="od('${a.id}')"><div class="tp"><span class="ic">${lucideIcon(a.ic, fm.c, 32)}</span><span class="lb ${esClass(a.es)}">${a.es}</span></div><h3>${a.n}</h3><p>${a.s}</p><div class="mt"><span class="lb lb-f" style="color:${fc.c};border-color:${fc.c}44">${fc.l}</span><span class="lb lb-m">${fl(a.fo)}</span></div></div>`});
     h+='</div></div>';
   });
   $('gc').innerHTML=h;
@@ -147,7 +147,7 @@ function dc(a,iC){
   const to=(a.rl.t||[]).map(ga).filter(Boolean),fr=(a.rl.fr||[]).map(ga).filter(Boolean),cf=(a.rl.cf||[]).map(ga).filter(Boolean);
   let h=`<div class="dt">`;
   if(iC)h+=`<button class="dx" onclick="cmpId=null;rd()">✕</button>`;
-  h+=`<div class="dtp"><span class="ic">${lucideIcon(a.ic, fc.c)}</span><div><div class="dnm">${a.n}</div><div class="dtg">
+  h+=`<div class="dtp"><span class="ic">${lucideIcon(a.ic, fm.c, 32)}</span><div><div class="dnm">${a.n}</div><div class="dtg">
     <span class="lb lb-f" style="color:${fm.c};border-color:${fm.c}44">${fm.l}</span>
     <span class="lb ${esClass(a.es)}">${a.es}</span>
     <span class="lb lb-m">${a.lc}</span><span class="lb lb-m">${fl(a.fo)}</span>
