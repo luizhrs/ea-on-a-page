@@ -121,30 +121,43 @@ function renderMap(){
     <div class="hl-panel-hd">
       <div>
         <div class="hl-panel-title">Highlight artifacts</div>
-        <div class="hl-panel-sub">Select one or more values across any dimension — only artifacts matching <em>all</em> selected groups are highlighted.</div>
+        <div class="hl-panel-sub">Select across any dimension — only artifacts matching <em>all</em> selected filters are highlighted.</div>
       </div>
       <button class="hl-clear" onclick="clearMapFilters()" id="hl-clear-btn">Clear all</button>
     </div>
     <div class="hl-groups">
-      <div class="hl-group"><div class="hl-group-label">Essentiality</div><div class="hl-group-pills">
-        <button class="map-fpill mf-essential" onclick="mapFilter('es','essential',this)">Essential</button>
-        <button class="map-fpill mf-popular" onclick="mapFilter('es','popular',this)">Popular</button>
-        <button class="map-fpill mf-common" onclick="mapFilter('es','common',this)">Common</button>
-        <button class="map-fpill mf-uncommon" onclick="mapFilter('es','uncommon',this)">Uncommon</button>
-      </div></div>
-      <div class="hl-group"><div class="hl-group-label">EA Process</div><div class="hl-group-pills">
-        <button class="map-fpill mf-proc-strategic" onclick="mapFilter('proc','strategic',this)">Strategic Planning</button>
-        <button class="map-fpill mf-proc-optimisation" onclick="mapFilter('proc','optimisation',this)">Technology Optimisation</button>
-        <button class="map-fpill mf-proc-delivery" onclick="mapFilter('proc','delivery',this)">Initiative Delivery</button>
-      </div></div>
-      <div class="hl-group"><div class="hl-group-label">Focus</div><div class="hl-group-pills">
-        <button class="map-fpill mf-focus-business" onclick="mapFilter('fo','business',this)">Business-focused</button>
-        <button class="map-fpill mf-focus-it" onclick="mapFilter('fo','it',this)">IT-focused</button>
-      </div></div>
-      <div class="hl-group"><div class="hl-group-label">Lifecycle</div><div class="hl-group-pills">
-        <button class="map-fpill mf-lc-permanent" onclick="mapFilter('lc','permanent',this)">Permanent</button>
-        <button class="map-fpill mf-lc-temporary" onclick="mapFilter('lc','temporary',this)">Temporary</button>
-      </div></div>
+      <div class="hl-group-card">
+        <div class="hl-group-label">Essentiality</div>
+        <div class="hl-group-pills">
+          <button class="map-fpill mf-essential"        onclick="mapFilter('es','essential',this)">Essential</button>
+          <button class="map-fpill mf-popular"          onclick="mapFilter('es','popular',this)">Popular</button>
+          <button class="map-fpill mf-common"           onclick="mapFilter('es','common',this)">Common</button>
+          <button class="map-fpill mf-uncommon"         onclick="mapFilter('es','uncommon',this)">Uncommon</button>
+        </div>
+      </div>
+      <div class="hl-group-card">
+        <div class="hl-group-label">EA Process</div>
+        <div class="hl-group-pills">
+          <button class="map-fpill mf-proc-strategic"    onclick="mapFilter('proc','strategic',this)">Strategic Planning</button>
+          <button class="map-fpill mf-proc-optimisation" onclick="mapFilter('proc','optimisation',this)">Technology Optimisation</button>
+          <button class="map-fpill mf-proc-delivery"     onclick="mapFilter('proc','delivery',this)">Initiative Delivery</button>
+        </div>
+      </div>
+      <div class="hl-group-card">
+        <div class="hl-group-label">Focus</div>
+        <div class="hl-group-pills">
+          <button class="map-fpill mf-focus-business" onclick="mapFilter('fo','business',this)">Business-focused</button>
+          <button class="map-fpill mf-focus-both"     onclick="mapFilter('fo','both',this)">Business + IT</button>
+          <button class="map-fpill mf-focus-it"       onclick="mapFilter('fo','it',this)">IT-focused</button>
+        </div>
+      </div>
+      <div class="hl-group-card">
+        <div class="hl-group-label">Lifecycle</div>
+        <div class="hl-group-pills">
+          <button class="map-fpill mf-lc-permanent" onclick="mapFilter('lc','permanent',this)">Permanent</button>
+          <button class="map-fpill mf-lc-temporary" onclick="mapFilter('lc','temporary',this)">Temporary</button>
+        </div>
+      </div>
     </div>
   </div>`;
 
@@ -329,7 +342,7 @@ function applyMapFilters() {
     }
     if (activeFilters.fo.size > 0) {
       const chipFo = chip.dataset.fo || '';
-      match = match && (activeFilters.fo.has(chipFo) || chipFo === 'both');
+      match = match && activeFilters.fo.has(chipFo);
     }
     if (activeFilters.lc.size > 0) {
       match = match && activeFilters.lc.has(chip.dataset.lc);

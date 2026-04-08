@@ -125,10 +125,11 @@ body.dark .lb-p{background:rgba(106,123,79,.18);color:#a0b872}
 .hl-panel-sub em{font-style:normal;font-weight:700;color:var(--tx2)}
 .hl-clear{padding:5px 12px;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;font-size:12px;font-weight:600;color:var(--tx3);cursor:pointer;font-family:inherit;white-space:nowrap;flex-shrink:0;transition:all .15s;opacity:.35}
 .hl-clear:hover{border-color:var(--bdH);color:var(--tx);opacity:1}
-.hl-groups{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:flex-start}
-.hl-group{display:flex;flex-direction:column;gap:5px}
+.hl-groups{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hl-group-card{background:var(--sf2);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
 .hl-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx4)}
 .hl-group-pills{display:flex;flex-wrap:wrap;gap:4px}
+@media(max-width:600px){.hl-groups{grid-template-columns:1fr}}
 /* Map filter pills */
 .map-filter-group{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
 .map-filter-sep{width:1px;height:28px;background:var(--bd);align-self:center;flex-shrink:0}
@@ -146,6 +147,8 @@ body.dark .map-fpill.mf-common{background:rgba(74,109,138,.15)}
 .map-fpill.mf-proc-delivery{border-color:#7a5f99;color:#7a5f99;background:rgba(122,95,153,.07)}
 .map-fpill.mf-focus-business{border-color:#6a7b4f;color:#6a7b4f;background:rgba(106,123,79,.07)}
 body.dark .map-fpill.mf-focus-business{background:rgba(106,123,79,.15)}
+.map-fpill.mf-focus-both{border-color:#7a5f99;color:#7a5f99;background:rgba(122,95,153,.07)}
+body.dark .map-fpill.mf-focus-both{background:rgba(122,95,153,.15)}
 .map-fpill.mf-focus-it{border-color:#4a6d8a;color:#4a6d8a;background:rgba(74,109,138,.07)}
 body.dark .map-fpill.mf-focus-it{background:rgba(74,109,138,.15)}
 .map-fpill.mf-lc-permanent{border-color:#7a5f99;color:#7a5f99;background:rgba(122,95,153,.07)}
