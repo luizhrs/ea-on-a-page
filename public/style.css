@@ -129,7 +129,7 @@ body.dark .lb-p{background:rgba(106,123,79,.18);color:#a0b872}
 .hl-group-card{background:var(--sf2);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
 .hl-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx4)}
 .hl-group-pills{display:flex;flex-wrap:wrap;gap:4px}
-@media(max-width:600px){.hl-groups{grid-template-columns:1fr}}
+@media(max-width:700px){.hl-groups{grid-template-columns:1fr}}
 /* Map filter pills */
 .map-filter-group{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
 .map-filter-sep{width:1px;height:28px;background:var(--bd);align-self:center;flex-shrink:0}
@@ -347,15 +347,16 @@ body.dark .es-common{background:rgba(74,109,138,.18);color:#7aaac8}
   .hub-grid{grid-template-columns:1fr 1fr}
   .hub-hero h1{font-size:28px}
   .proc-cards{grid-template-columns:1fr}
-  .fwm{flex-direction:column}
-  .fwm-yaxis{flex-direction:row;width:auto;height:28px;margin:0 0 6px 0;padding:0}
-  .fwm-yaxis-lbl{writing-mode:horizontal-tb;transform:none}
-  .fwm-yaxis-mid{display:none}
-  .fwm-yaxis-line{width:20px;height:1px}
-  .fwm-row{grid-template-columns:60px 1fr 1fr 1fr;font-size:11px}
-  .fwm-row-lbl-txt{font-size:8px}
+  /* Map: stack fully on mobile */
+  .fwm{flex-direction:column;gap:0}
+  .fwm-yaxis{display:none}
+  .fwm-body{width:100%}
+  .fwm-row{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+  .fwm-row-lbl{display:block;padding:6px 0;border:none;background:none;border-radius:0;border-bottom:1px solid var(--bd);margin-bottom:2px}
+  .fwm-row-lbl-txt{writing-mode:horizontal-tb;transform:none;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tx3)}
   .fwm-cell{padding:10px}
   .fwm-cell-name{font-size:14px}
+  .fwm-xaxis{display:none}
   .mat-stage-body{grid-template-columns:1fr 1fr}
   .fn-tiers,.fn-govs{grid-template-columns:1fr}
   .proc-io{grid-template-columns:1fr}
@@ -373,7 +374,7 @@ body.dark .es-common{background:rgba(74,109,138,.18);color:#7aaac8}
   .hub-grid{grid-template-columns:1fr}
   .cg{grid-template-columns:1fr}
   .mat-stage-body{grid-template-columns:1fr}
-  .fwm-row{grid-template-columns:50px 1fr 1fr}
+  /* fwm already stacked via 700px breakpoint */
 }
 
 /* Lucide icon alignment */
