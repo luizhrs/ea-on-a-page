@@ -225,7 +225,7 @@ function renderMap(){
 
 
 /* ═══ DETAIL ═══ */
-function od(id,from){selId=id;cmpId=null;nav('detail');rd()}
+function od(id){navDetail(id);}
 function oc(id){cmpId=id;rd()}
 function rd(){
   const a=ga(selId);if(!a)return;
