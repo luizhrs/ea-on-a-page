@@ -28,43 +28,73 @@ let cRef = null;
 /* ═══ GRID ═══ */
 let _gs = {sq:'',ff:'all',fe:'all',flc:'all'};
 
-function rg(){
-  const panel = $('art-panel'); if(!panel) return;
+// Build cards + count only — never rebuilds the toolbar, so search input keeps focus
+function _filterGrid(){
+  const cards_el = $('grid-cards');
+  const cnt_el   = $('grid-cnt');
+  if(!cards_el || !cnt_el) return;
+
   const s = _gs;
   const fa = DA.filter(a=>{
     if(s.ff!=='all'&&a.fo!==s.ff) return false;
     if(s.fe!=='all'&&a.es!==s.fe) return false;
     if(s.flc!=='all'&&a.lc!==s.flc) return false;
-    if(s.sq) return a.n.toLowerCase().includes(s.sq)||a.s.toLowerCase().includes(s.sq)||a.q.toLowerCase().includes(s.sq)||a.de.some(d=>d.toLowerCase().includes(s.sq));
+    if(s.sq){const q=s.sq.toLowerCase();return a.n.toLowerCase().includes(q)||a.s.toLowerCase().includes(q)||a.q.toLowerCase().includes(q)||a.de.some(d=>d.toLowerCase().includes(q));}
     return true;
   });
-  let cards='';
+
+  cnt_el.textContent = fa.length+' artifact'+(fa.length!==1?'s':'')+(s.sq?` matching “${s.sq}”`:'');
+
+  let h='';
   Object.entries(FM).forEach(([fk,fm])=>{
     const items=fa.filter(a=>a.f===fk);if(!items.length)return;
     const ES_ORD={essential:0,popular:1,common:2,uncommon:3};
     items.sort((a,b)=>(ES_ORD[a.es]??9)-(ES_ORD[b.es]??9));
-    cards+=`<div class="gs"><div class="gh"><div class="gd" style="background:${fm.c}"></div><h2>${fm.l}</h2><span>${fm.d}</span></div><div class="cg">`;
-    items.forEach(a=>{const fc=FM[a.f];cards+=`<div class="cd" onclick="od('${a.id}')"><div class="tp"><span class="ic">${lucideIcon(a.ic, fc.c, 20)}</span><span class="lb ${esClass(a.es)}">${a.es}</span></div><h3>${a.n}</h3><p>${a.s}</p><div class="mt"><span class="lb lb-f" style="color:${fc.c};border-color:${fc.c}44">${fc.l}</span><span class="lb lb-m">${fl(a.fo)}</span></div></div>`;});
-    cards+='</div></div>';
+    h+=`<div class="gs"><div class="gh"><div class="gd" style="background:${fm.c}"></div><h2>${fm.l}</h2><span>${fm.d}</span></div><div class="cg">`;
+    items.forEach(a=>{const fc=FM[a.f];h+=`<div class="cd" onclick="od('${a.id}')"><div class="tp"><span class="ic">${lucideIcon(a.ic, fc.c, 20)}</span><span class="lb ${esClass(a.es)}">${a.es}</span></div><h3>${a.n}</h3><p>${a.s}</p><div class="mt"><span class="lb lb-f" style="color:${fc.c};border-color:${fc.c}44">${fc.l}</span><span class="lb lb-m">${fl(a.fo)}</span></div></div>`;});
+    h+='</div></div>';
   });
+
+  cards_el.innerHTML = h;
+  refreshIcons(cards_el);
+}
+
+// Builds the full toolbar once; subsequent filter changes only call _filterGrid()
+function rg(){
+  const panel = $('art-panel'); if(!panel) return;
+  const s = _gs;
+
   panel.innerHTML = `
     <div class="toolbar">
-      <input class="search" type="text" placeholder="Search by name, question, or decision…" value="${s.sq.replace(/"/g,'&quot;')}" oninput="_gs.sq=this.value;rg()">
+      <input class="search" id="grid-search" type="text" placeholder="Search by name, question, or decision…"
+        value="${s.sq.replace(/"/g,'&quot;')}"
+        oninput="_gs.sq=this.value;_filterGrid()">
       <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <div class="sg"><label>Focus</label><select class="sel" onchange="_gs.ff=this.value;rg()">
-          <option value="all"${s.ff==='all'?' selected':''}>All</option><option value="business"${s.ff==='business'?' selected':''}>Business</option><option value="it"${s.ff==='it'?' selected':''}>IT</option><option value="both"${s.ff==='both'?' selected':''}>Both</option>
+        <div class="sg"><label>Focus</label><select class="sel" onchange="_gs.ff=this.value;_filterGrid()">
+          <option value="all"${s.ff==='all'?' selected':''}>All</option>
+          <option value="business"${s.ff==='business'?' selected':''}>Business</option>
+          <option value="both"${s.ff==='both'?' selected':''}>Business + IT</option>
+          <option value="it"${s.ff==='it'?' selected':''}>IT</option>
         </select></div>
-        <div class="sg"><label>Essentiality</label><select class="sel" onchange="_gs.fe=this.value;rg()">
-          <option value="all"${s.fe==='all'?' selected':''}>All</option><option value="essential"${s.fe==='essential'?' selected':''}>Essential</option><option value="popular"${s.fe==='popular'?' selected':''}>Popular</option><option value="common"${s.fe==='common'?' selected':''}>Common</option><option value="uncommon"${s.fe==='uncommon'?' selected':''}>Uncommon</option>
+        <div class="sg"><label>Essentiality</label><select class="sel" onchange="_gs.fe=this.value;_filterGrid()">
+          <option value="all"${s.fe==='all'?' selected':''}>All</option>
+          <option value="essential"${s.fe==='essential'?' selected':''}>Essential</option>
+          <option value="popular"${s.fe==='popular'?' selected':''}>Popular</option>
+          <option value="common"${s.fe==='common'?' selected':''}>Common</option>
+          <option value="uncommon"${s.fe==='uncommon'?' selected':''}>Uncommon</option>
         </select></div>
-        <div class="sg"><label>Lifecycle</label><select class="sel" onchange="_gs.flc=this.value;rg()">
-          <option value="all"${s.flc==='all'?' selected':''}>All</option><option value="permanent"${s.flc==='permanent'?' selected':''}>Permanent</option><option value="temporary"${s.flc==='temporary'?' selected':''}>Temporary</option>
+        <div class="sg"><label>Lifecycle</label><select class="sel" onchange="_gs.flc=this.value;_filterGrid()">
+          <option value="all"${s.flc==='all'?' selected':''}>All</option>
+          <option value="permanent"${s.flc==='permanent'?' selected':''}>Permanent</option>
+          <option value="temporary"${s.flc==='temporary'?' selected':''}>Temporary</option>
         </select></div>
       </div>
     </div>
-    <div class="cnt">${fa.length} artifact${fa.length!==1?'s':''}${s.sq?' matching “'+s.sq+'”':''}</div>
-    ${cards}`;
-  ua(); refreshIcons(panel);
+    <div class="cnt" id="grid-cnt"></div>
+    <div id="grid-cards"></div>`;
+
+  ua();
+  _filterGrid();
 }
 
 /* ═══ MAP ═══ */
