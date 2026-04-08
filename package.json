@@ -1,0 +1,10 @@
+{
+  "name": "ea-on-a-page",
+  "version": "1.0.0",
+  "description": "Interactive navigator for Kotusev's Enterprise Architecture on a Page framework",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve public -l 3000",
+    "build": "echo 'Static site — no build step required'"
+  }
+}
