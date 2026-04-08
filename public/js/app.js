@@ -24,66 +24,78 @@ function ua(){
 
 /* ═══ NAV ═══ */
 let curV = 'home', prevV = 'home';
-const ARTIFACTS_VIEWS = ['grid', 'map', 'chooser', 'detail'];
+let curTab = 'map'; // active artifact tab: map | grid | chooser
+const ARTIFACT_TABS = ['map', 'grid', 'chooser'];
 
 function nav(v) {
-  if (v !== 'detail') prevV = curV;
+  const isTab = ARTIFACT_TABS.includes(v);
+  const effectiveV = isTab ? 'artifacts' : v;
+
+  if (effectiveV !== 'detail') prevV = curV;
 
   // Switch visible view
   document.querySelectorAll('.v').forEach(x => x.classList.remove('on'));
-  $('v-' + v).classList.add('on');
+  const vEl = $('v-' + effectiveV);
+  if (vEl) vEl.classList.add('on');
 
   // Clear all nav highlights
-  document.querySelectorAll('.nb, .mnb').forEach(b => b.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
 
-  // Highlight main nav
-  const mainNavMap = {home:'nh', practice:'npr', function:'nfu', maturity:'nma'};
-  if (mainNavMap[v]) $(mainNavMap[v]).classList.add('on');
-  if (ARTIFACTS_VIEWS.includes(v)) {
-    const nart = $('nart');
-    if (nart) nart.classList.add('on');
-  }
+  // Highlight main nav button
+  const mainNavMap = {home:'nh', practice:'npr', function:'nfu', maturity:'nma', artifacts:'nart'};
+  const navId = mainNavMap[effectiveV];
+  if (navId) { const btn = $(navId); if(btn) btn.classList.add('on'); }
 
-  // Show/hide inline artifact sub-nav
-  const subnav = $('art-subnav');
-  if (subnav) subnav.style.display = ARTIFACTS_VIEWS.includes(v) ? 'flex' : 'none';
-
-  // Highlight sub-nav tab
-  const subNavMap = {grid:'asn-grid', map:'asn-map', chooser:'asn-find'};
-  if (subNavMap[v]) {
-    const btn = $(subNavMap[v]);
-    if (btn) btn.classList.add('on');
-  }
+  // If navigating to an artifact tab, switch the tab
+  if (isTab) switchTab(v, false);
 
   // Update back button label in detail view
   const bkBtn = $('bk-btn');
   if (bkBtn) {
+    const tabLabels = {map:'← Map', grid:'← Explore', chooser:'← Find'};
     const labels = {
-      grid: '← All artifacts',
-      map: '← Framework map',
-      chooser: '← Find',
-      home: '← Home',
-      practice: '← Practice',
-      function: '← Function',
-      maturity: '← Maturity',
+      artifacts: tabLabels[curTab] || '← Artifacts',
+      home:'← Home', practice:'← Practice', function:'← Function', maturity:'← Maturity',
     };
     bkBtn.textContent = labels[prevV] || '← Back';
   }
 
-  // Render views on demand
-  if (v === 'grid')     rg();
-  if (v === 'map')      renderMap();
-  if (v === 'chooser')  { cProc = null; cRef = null; renderCh(); }
+  // Render sections on demand
   if (v === 'practice') renderPractice();
-  if (v === 'function') renderFunction();
-  if (v === 'maturity') renderMaturity();
+  if (v === 'function')  renderFunction();
+  if (v === 'maturity')  renderMaturity();
 
-  curV = v;
+  curV = effectiveV;
   window.scrollTo(0, 0);
 }
 
+// Switch between Map / Explore / Find tabs within the Artifacts section
+function switchTab(tab, scroll) {
+  curTab = tab;
+
+  // Highlight the active tab button
+  ['map','grid','chooser'].forEach(t => {
+    const btn = $('atab-' + t);
+    if (btn) btn.classList.toggle('art-tab-on', t === tab);
+  });
+
+  // Render into #art-panel
+  const panel = $('art-panel');
+  if (!panel) return;
+
+  if (tab === 'map')     renderMap();
+  if (tab === 'grid')    rg();
+  if (tab === 'chooser') { cProc = null; cRef = null; renderCh(); }
+
+  if (scroll !== false) window.scrollTo(0, 0);
+}
+
 function navBack() {
-  nav(prevV && prevV !== 'detail' ? prevV : 'grid');
+  if (prevV && prevV !== 'detail' && prevV !== 'artifacts') {
+    nav(prevV);
+  } else {
+    nav('artifacts');
+  }
 }
 
 /* ═══ INIT ═══ */

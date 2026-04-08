@@ -17,14 +17,7 @@
       <button class="nb" id="npr" onclick="nav('practice')">Practice</button>
       <button class="nb" id="nfu" onclick="nav('function')">Function</button>
       <button class="nb" id="nma" onclick="nav('maturity')">Maturity</button>
-      <button class="nb" id="nart" onclick="nav('grid')">Artifacts</button>
-      <!-- Artifact sub-nav: inline, hidden until Artifacts is active -->
-      <div class="art-subnav" id="art-subnav" style="display:none">
-        <span class="art-subnav-sep"></span>
-        <button class="snb" id="asn-grid" onclick="nav('grid')">Explore</button>
-        <button class="snb" id="asn-map" onclick="nav('map')">Map</button>
-        <button class="snb" id="asn-find" onclick="nav('chooser')">Find</button>
-      </div>
+      <button class="nb" id="nart" onclick="nav('map')">Artifacts</button>
       <button class="tb" id="tb" onclick="tog()">◐</button>
     </div>
   </div>
@@ -97,85 +90,14 @@
     </div>
   </div>
 
-  <!-- GRID -->
-  <div class="v" id="v-grid" style="padding-bottom:48px">
-    <div class="toolbar">
-      <input class="search" id="si" type="text" placeholder="Search by name, question, or decision…" oninput="rg()">
-      <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <div class="sg"><label>Focus</label><select class="sel" id="ff" onchange="rg()"><option value="all">All</option><option value="business">Business</option><option value="it">IT</option><option value="both">Both</option></select></div>
-        <div class="sg"><label>Essentiality</label><select class="sel" id="fe" onchange="rg()"><option value="all">All</option><option value="essential">Essential</option><option value="popular">Popular</option><option value="common">Common</option><option value="uncommon">Uncommon</option></select></div>
-        <div class="sg"><label>Lifecycle</label><select class="sel" id="flc" onchange="rg()"><option value="all">All</option><option value="permanent">Permanent</option><option value="temporary">Temporary</option></select></div>
-      </div>
+  <!-- ARTIFACTS (Map · Explore · Find) -->
+  <div class="v" id="v-artifacts" style="padding-bottom:48px">
+    <div class="art-tabs-bar">
+      <button class="art-tab" id="atab-map"     onclick="switchTab('map')">Map</button>
+      <button class="art-tab" id="atab-grid"    onclick="switchTab('grid')">Explore</button>
+      <button class="art-tab" id="atab-chooser" onclick="switchTab('chooser')">Find</button>
     </div>
-    <div class="cnt" id="cnt"></div>
-    <div id="gc"></div>
-  </div>
-
-  <!-- MAP -->
-  <div class="v" id="v-map">
-    <div class="map-wrap">
-      <h2>The EA Artifact Framework</h2>
-      <p class="sub">Artifacts positioned by what they describe (Rules → Solutions) and how they describe it (Business → IT focus). Click any artifact to explore it.</p>
-      <div class="hl-panel">
-        <div class="hl-panel-hd">
-          <div>
-            <div class="hl-panel-title">Highlight artifacts</div>
-            <div class="hl-panel-sub">Select one or more values across any dimension — only artifacts matching <em>all</em> selected groups are highlighted.</div>
-          </div>
-          <button class="hl-clear" onclick="clearMapFilters()" id="hl-clear-btn">Clear all</button>
-        </div>
-        <div class="hl-groups">
-          <div class="hl-group">
-            <div class="hl-group-label">Essentiality</div>
-            <div class="hl-group-pills">
-              <button class="map-fpill mf-essential"        onclick="mapFilter('es','essential',this)">Essential</button>
-              <button class="map-fpill mf-popular"          onclick="mapFilter('es','popular',this)">Popular</button>
-              <button class="map-fpill mf-common"           onclick="mapFilter('es','common',this)">Common</button>
-              <button class="map-fpill mf-uncommon"         onclick="mapFilter('es','uncommon',this)">Uncommon</button>
-            </div>
-          </div>
-          <div class="hl-group">
-            <div class="hl-group-label">EA Process</div>
-            <div class="hl-group-pills">
-              <button class="map-fpill mf-proc-strategic"    onclick="mapFilter('proc','strategic',this)">Strategic Planning</button>
-              <button class="map-fpill mf-proc-optimisation" onclick="mapFilter('proc','optimisation',this)">Technology Optimisation</button>
-              <button class="map-fpill mf-proc-delivery"     onclick="mapFilter('proc','delivery',this)">Initiative Delivery</button>
-            </div>
-          </div>
-          <div class="hl-group">
-            <div class="hl-group-label">Focus</div>
-            <div class="hl-group-pills">
-              <button class="map-fpill mf-focus-business" onclick="mapFilter('fo','business',this)">Business-focused</button>
-              <button class="map-fpill mf-focus-it"       onclick="mapFilter('fo','it',this)">IT-focused</button>
-            </div>
-          </div>
-          <div class="hl-group">
-            <div class="hl-group-label">Lifecycle</div>
-            <div class="hl-group-pills">
-              <button class="map-fpill mf-lc-permanent" onclick="mapFilter('lc','permanent',this)">Permanent</button>
-              <button class="map-fpill mf-lc-temporary" onclick="mapFilter('lc','temporary',this)">Temporary</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="map-grid"></div>
-    </div>
-  </div>
-
-  <!-- CHOOSER -->
-  <div class="v" id="v-chooser">
-    <div class="cw">
-      <h2>What are you working on?</h2>
-      <p class="sub">EA artifacts serve three distinct processes. Select one to see the relevant artifacts, then refine further.</p>
-      <div style="font-size:11px;font-weight:600;color:var(--tx4);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">EA Process</div>
-      <div class="pills" id="ppills"></div>
-      <div id="pdesc" style="font-size:12px;color:var(--tx3);margin:8px 0 20px;line-height:1.5"></div>
-      <div id="frow" style="display:none;margin-bottom:20px">
-        <div style="font-size:11px;font-weight:600;color:var(--tx4);margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">Refine by</div>
-        <div class="pills" id="fpills"></div>
-      </div>
-      <div id="chres"></div>
-    </div>
+    <div id="art-panel"></div>
   </div>
 
   <!-- DETAIL -->

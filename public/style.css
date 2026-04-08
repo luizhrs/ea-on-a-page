@@ -341,12 +341,7 @@ body.dark .es-common{background:rgba(74,109,138,.18);color:#7aaac8}
   .tb{margin-left:4px;flex-shrink:0}
 }
 
-/* Inline artifact sub-nav (appears in main header next to Artifacts) */
-.art-subnav{display:none;align-items:center;gap:1px}
-.art-subnav-sep{width:1px;height:14px;background:var(--bd);margin:0 4px;flex-shrink:0}
-.snb{padding:5px 10px;font-size:12px;font-weight:500;color:var(--tx4);background:none;border:none;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;-webkit-tap-highlight-color:transparent;white-space:nowrap}
-.snb:hover{color:var(--tx);background:var(--sf2)}
-.snb.on{color:var(--tx);background:var(--sf2);font-weight:600}
+
 
 /* Main layout padding on mobile */
 @media(max-width:700px){
@@ -397,4 +392,13 @@ body.dark .es-common{background:rgba(74,109,138,.18);color:#7aaac8}
   .map-fpill{padding:7px 16px}
   .pill{padding:10px 18px}
   .ch-card{padding:18px}
+}
+
+/* === ARTIFACT PAGE TABS === */
+.art-tabs-bar{display:flex;align-items:center;gap:0;border-bottom:1px solid var(--bd);margin-bottom:24px;padding-top:20px}
+.art-tab{padding:10px 18px;font-size:13px;font-weight:500;color:var(--tx3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s;-webkit-tap-highlight-color:transparent;margin-bottom:-1px}
+.art-tab:hover{color:var(--tx)}
+.art-tab-on{color:var(--ac);border-bottom-color:var(--ac);font-weight:600}
+@media(max-width:700px){
+  .art-tab{padding:8px 12px;font-size:12px}
 }
