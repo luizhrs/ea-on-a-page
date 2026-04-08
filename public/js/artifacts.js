@@ -32,7 +32,7 @@ function rg(){
   const panel = $('art-panel'); if(!panel) return;
   const s = _gs;
   const fa = DA.filter(a=>{
-    if(s.ff!=='all'&&a.fo!==s.ff&&a.fo!=='both') return false;
+    if(s.ff!=='all'&&a.fo!==s.ff) return false;
     if(s.fe!=='all'&&a.es!==s.fe) return false;
     if(s.flc!=='all'&&a.lc!==s.flc) return false;
     if(s.sq) return a.n.toLowerCase().includes(s.sq)||a.s.toLowerCase().includes(s.sq)||a.q.toLowerCase().includes(s.sq)||a.de.some(d=>d.toLowerCase().includes(s.sq));
