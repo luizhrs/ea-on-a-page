@@ -117,6 +117,37 @@ function renderMap(){
     </div>`;
   }
 
+  const hlPanel = `<div class="hl-panel">
+    <div class="hl-panel-hd">
+      <div>
+        <div class="hl-panel-title">Highlight artifacts</div>
+        <div class="hl-panel-sub">Select one or more values across any dimension — only artifacts matching <em>all</em> selected groups are highlighted.</div>
+      </div>
+      <button class="hl-clear" onclick="clearMapFilters()" id="hl-clear-btn">Clear all</button>
+    </div>
+    <div class="hl-groups">
+      <div class="hl-group"><div class="hl-group-label">Essentiality</div><div class="hl-group-pills">
+        <button class="map-fpill mf-essential" onclick="mapFilter('es','essential',this)">Essential</button>
+        <button class="map-fpill mf-popular" onclick="mapFilter('es','popular',this)">Popular</button>
+        <button class="map-fpill mf-common" onclick="mapFilter('es','common',this)">Common</button>
+        <button class="map-fpill mf-uncommon" onclick="mapFilter('es','uncommon',this)">Uncommon</button>
+      </div></div>
+      <div class="hl-group"><div class="hl-group-label">EA Process</div><div class="hl-group-pills">
+        <button class="map-fpill mf-proc-strategic" onclick="mapFilter('proc','strategic',this)">Strategic Planning</button>
+        <button class="map-fpill mf-proc-optimisation" onclick="mapFilter('proc','optimisation',this)">Technology Optimisation</button>
+        <button class="map-fpill mf-proc-delivery" onclick="mapFilter('proc','delivery',this)">Initiative Delivery</button>
+      </div></div>
+      <div class="hl-group"><div class="hl-group-label">Focus</div><div class="hl-group-pills">
+        <button class="map-fpill mf-focus-business" onclick="mapFilter('fo','business',this)">Business-focused</button>
+        <button class="map-fpill mf-focus-it" onclick="mapFilter('fo','it',this)">IT-focused</button>
+      </div></div>
+      <div class="hl-group"><div class="hl-group-label">Lifecycle</div><div class="hl-group-pills">
+        <button class="map-fpill mf-lc-permanent" onclick="mapFilter('lc','permanent',this)">Permanent</button>
+        <button class="map-fpill mf-lc-temporary" onclick="mapFilter('lc','temporary',this)">Temporary</button>
+      </div></div>
+    </div>
+  </div>`;
+
   let h = `<div class="fwm">
     <div class="fwm-yaxis">
       <span class="fwm-yaxis-lbl">Business</span>
@@ -142,8 +173,9 @@ function renderMap(){
     </div>
   </div>`;
 
-  $('art-panel').innerHTML = h;
+  $('art-panel').innerHTML = hlPanel + h;
   refreshIcons($('art-panel'));
+  applyMapFilters();
 }
 
 
@@ -267,6 +299,19 @@ function applyMapFilters() {
   const anyActive = Object.values(activeFilters).some(s => s.size > 0);
   const clearBtn = document.getElementById('hl-clear-btn');
   if (clearBtn) clearBtn.style.opacity = anyActive ? '1' : '0.35';
+
+  // Restore pill active states (lost when renderMap re-renders the DOM)
+  const dimMap = {
+    es: ['essential','popular','common','uncommon'],
+    proc: ['strategic','optimisation','delivery'],
+    fo: ['business','it'],
+    lc: ['permanent','temporary'],
+  };
+  document.querySelectorAll('.map-fpill').forEach(btn => {
+    const oc = btn.getAttribute('onclick') || '';
+    const m = oc.match(/mapFilter\('(\w+)','(\w+)'/);
+    if (m) btn.classList.toggle('active', activeFilters[m[1]]?.has(m[2]));
+  });
 
   chips.forEach(chip => {
     if (!anyActive) { chip.classList.remove('dim'); return; }
