@@ -18,7 +18,7 @@ body{
   --vBg:#faf9f7;--vS:#d6d1ca;--vN:#f0ede9;--vT:#7a746d;
   --sh:0 1px 3px rgba(0,0,0,.04);
   background:var(--bg);color:var(--tx);
-  font-family:'Satoshi',system-ui,sans-serif;font-size:20px;
+  font-family:'Satoshi',system-ui,sans-serif;font-size:17px;
   -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;
 }
 
@@ -239,8 +239,8 @@ footer{padding:32px 24px 60px;border-top:1px solid var(--bd);text-align:center}
 
 <div class="fs-bar">
   <label>Aa</label>
-  <input type="range" id="fslider" min="80" max="130" value="100" step="5" oninput="setFs(this.value)">
-  <span class="fs-val" id="fsval">100%</span>
+  <input type="range" id="fslider" min="90" max="150" value="115" step="5" oninput="setFs(this.value)">
+  <span class="fs-val" id="fsval">115%</span>
 </div>
 
 <script>
@@ -425,7 +425,7 @@ function pickRef(v){cRef=v;renderCh()}
 (function(){
   $('ac2').textContent=DA.length;
   let h='';Object.entries(FM).forEach(([k,fm])=>{const c=DA.filter(a=>a.f===k).length;h+=`<div class="fi"><div class="fb" style="background:${fm.c}"></div><div><div class="fn">${fm.l}</div><div class="fd">${fm.d} · ${c} artifact${c>1?'s':''}</div></div></div>`});
-  $('flist').innerHTML=h;ua();
+  $('flist').innerHTML=h;ua();setFs(115);
 })();
 </script>
 </body>
