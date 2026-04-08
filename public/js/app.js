@@ -12,8 +12,39 @@ function tog(){
 
 function setFs(v){
   document.querySelector('main').style.zoom = v/100;
-  $('fsval').textContent = (v-30) + '%';
 }
+
+function setFsBtn(zoom, btn){
+  setFs(zoom);
+  // Highlight active button
+  document.querySelectorAll('.aa-sz').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  // Persist
+  try{ localStorage.setItem('ea-fs', zoom); }catch(e){}
+  closeFsPanel();
+}
+
+function toggleFsPanel(e){
+  if(e) e.stopPropagation();
+  const panel = $('aa-panel');
+  if(!panel) return;
+  const isOpen = panel.style.display !== 'none';
+  panel.style.display = isOpen ? 'none' : 'block';
+}
+
+function closeFsPanel(){
+  const panel = $('aa-panel');
+  if(panel) panel.style.display = 'none';
+}
+
+// Close panel when clicking outside
+document.addEventListener('click', function(e){
+  const panel = $('aa-panel');
+  const btn   = $('aa-btn');
+  if(panel && btn && !panel.contains(e.target) && !btn.contains(e.target)){
+    panel.style.display = 'none';
+  }
+});
 
 function ua(){
   const dk = document.body.classList.contains('dark');
@@ -169,7 +200,18 @@ window.addEventListener('popstate', (e) => {
   });
   const fl = $('flist'); if(fl) fl.innerHTML = h;
   ua();
-  setFs(130);
+  // Restore saved font size
+  const savedZoom = (() => { try{ return parseInt(localStorage.getItem('ea-fs'))||100; }catch(e){ return 100; } })();
+  setFs(savedZoom);
+  // Mark the matching size button as active
+  document.querySelectorAll('.aa-sz').forEach(btn => {
+    if(parseInt(btn.dataset.zoom) === savedZoom) btn.classList.add('active');
+  });
+  // Default to M if nothing matched
+  if(!document.querySelector('.aa-sz.active')){
+    const m = document.querySelector('.aa-sz[data-zoom="100"]');
+    if(m) m.classList.add('active');
+  }
 
   // Parse URL hash on first load — enables deep linking and page refresh
   const initState = hashToState(location.hash);

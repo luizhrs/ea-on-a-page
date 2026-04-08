@@ -122,11 +122,6 @@
 </footer>
 
 
-<div class="fs-bar">
-  <label>Aa</label>
-  <input type="range" id="fslider" min="90" max="150" value="130" step="5" oninput="setFs(this.value)">
-  <span class="fs-val" id="fsval">115%</span>
-</div>
 
 <!-- Scripts: load in dependency order -->
 <script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js"></script>
@@ -137,5 +132,21 @@
 <script src="js/maturity.js"></script>
 <script src="js/function.js"></script>
 <script src="js/app.js"></script>
+
+<!-- Text size widget -->
+<button class="aa-btn" id="aa-btn" onclick="toggleFsPanel(event)" title="Text size">Aa</button>
+
+<div class="aa-panel" id="aa-panel" style="display:none">
+  <div class="aa-panel-title">Text size</div>
+  <div class="aa-sizes">
+    <button class="aa-sz" data-zoom="85"  onclick="setFsBtn(85,this)">S</button>
+    <button class="aa-sz" data-zoom="100" onclick="setFsBtn(100,this)">M</button>
+    <button class="aa-sz" data-zoom="115" onclick="setFsBtn(115,this)">L</button>
+    <button class="aa-sz" data-zoom="130" onclick="setFsBtn(130,this)">XL</button>
+    <button class="aa-sz" data-zoom="150" onclick="setFsBtn(150,this)">XXL</button>
+  </div>
+  <div class="aa-panel-note">Saved to this browser only.</div>
+</div>
+
 </body>
 </html>
