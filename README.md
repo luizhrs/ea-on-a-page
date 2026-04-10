@@ -9,13 +9,13 @@
 
 </div>
 
-A lightweight interactive version of Kotusev's Enterprise Architecture on a Page framework, built as a study aid and a coding experiment.
+A lightweight interactive navigator for Kotusev's EA Artifacts on a Page framework, built as a study aid and a coding experiment. The focus is the 28 EA artifacts - their purpose, format, audience, and relationships. Three further topics (Practice, Function, Maturity) are included as early-stage overviews.
 
 ---
 
 ## Why this exists
 
-I'm an MSc student studying Enterprise Architecture, and like most people encountering the EA on a Page framework for the first time, I found it incredibly useful but hard to navigate in PDF form. There are 28 artifacts across 6 families, spread across four interconnected reference models - with overlapping names, different lifecycles, and subtle distinctions that matter in practice.
+I'm an MSc student studying Enterprise Architecture, and like most people encountering the EA on a Page framework for the first time, I found it incredibly useful but hard to navigate in PDF form. There are 28 artifacts across 6 families - with overlapping names, different lifecycles, and subtle distinctions that matter in practice.
 
 So I decided to build something to help me (and hopefully others) learn and explore the framework interactively - rather than scrolling through dense one-pagers trying to remember the difference between a Solution Overview and a Solution Design.
 

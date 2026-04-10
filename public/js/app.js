@@ -65,12 +65,14 @@ const ARTIFACT_TABS = ['map', 'grid', 'chooser'];
 function stateToHash(state) {
   if (state.v === 'detail')     return `#artifact/${state.id}`;
   if (state.v === 'artifacts')  return `#artifacts/${state.tab || 'map'}`;
+  if (state.v === 'more')       return '#more';
   return `#${state.v}`;
 }
 
 function hashToState(hash) {
   hash = (hash || '').replace(/^#/, '');
   if (!hash || hash === 'home')           return {v:'home'};
+  if (hash === 'more')                    return {v:'more'};
   if (hash === 'practice')                return {v:'practice'};
   if (hash === 'function')                return {v:'function'};
   if (hash === 'maturity')                return {v:'maturity'};
@@ -92,7 +94,7 @@ function _render(state) {
 
   // Main nav highlight
   document.querySelectorAll('.nb').forEach(b => b.classList.remove('on'));
-  const mainNavMap = {home:'nh', practice:'npr', function:'nfu', maturity:'nma', artifacts:'nart'};
+  const mainNavMap = {home:'nh', artifacts:'nart', more:'nmore', practice:'nmore', function:'nmore', maturity:'nmore'};
   const navId = mainNavMap[effectiveV] || mainNavMap[v];
   if (navId) { const btn = $(navId); if(btn) btn.classList.add('on'); }
 
@@ -112,9 +114,9 @@ function _render(state) {
   }
 
   // Other sections
-  if (v === 'practice') renderPractice();
-  if (v === 'function')  renderFunction();
-  if (v === 'maturity')  renderMaturity();
+  if (v === 'practice') { renderPractice(); }
+  if (v === 'function')  { renderFunction(); }
+  if (v === 'maturity')  { renderMaturity(); }
 
   curV = v === 'detail' ? 'detail' : effectiveV;
   window.scrollTo(0, 0);
@@ -170,12 +172,16 @@ function switchTab(tab, scroll) {
 function _updateBackBtn() {
   const bkBtn = $('bk-btn');
   if (!bkBtn) return;
-  // Look at the previous history entry's state
-  // We can't read previous state directly, but we stored fromTab in detail state
   const state = history.state || {};
   const fromTab = state.fromTab || curTab;
   const tabLabels = {map:'← Map', grid:'← Explore', chooser:'← Find'};
   bkBtn.textContent = tabLabels[fromTab] || '← Artifacts';
+}
+
+// Patch back button for practice/function/maturity detail views
+function _updateSectionBack(sectionEl, label) {
+  const bk = sectionEl ? sectionEl.querySelector('.section-back') : null;
+  if (bk) bk.textContent = label;
 }
 
 function navBack() {

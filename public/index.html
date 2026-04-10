@@ -14,10 +14,8 @@
     <div class="br" onclick="nav('home')"><div class="bm">EA</div><div><div class="bn">EA on a Page</div><div class="bt">Kotusev Navigator</div></div></div>
     <div class="nr">
       <button class="nb" id="nh" onclick="nav('home')">Home</button>
-      <button class="nb" id="npr" onclick="nav('practice')">Practice</button>
-      <button class="nb" id="nfu" onclick="nav('function')">Function</button>
-      <button class="nb" id="nma" onclick="nav('maturity')">Maturity</button>
       <button class="nb" id="nart" onclick="nav('map')">Artifacts</button>
+      <button class="nb" id="nmore" onclick="nav('more')">More</button>
       <button class="tb" id="tb" onclick="tog()">◐</button>
     </div>
   </div>
@@ -27,42 +25,105 @@
   <!-- HOME -->
   <div class="v on" id="v-home">
     <div class="hub-hero">
-      <h1>Enterprise Architecture<br><em>on a Page</em></h1>
-      <p>An interactive navigator for Svyatoslav Kotusev's EA framework — four interconnected reference models covering the practice, function, maturity and artifacts of enterprise architecture.</p>
+      <h1>EA Artifacts<br><em>on a Page</em></h1>
+      <p>Navigate Kotusev's 28 EA artifacts interactively. Explore all families, understand their purpose, and see how they connect.</p>
     </div>
-    <div class="hub-grid">
-      <div class="hub-card" onclick="nav('practice')" style="border-top-color:#b45630">
-        <div class="hub-card-icon">⟳</div>
-        <div class="hub-card-sub">EA Practice on a Page</div>
-        <div class="hub-card-title">Three EA Processes</div>
-        <div class="hub-card-desc">Strategic Planning, Technology Optimisation, and Initiative Delivery — their goals, structures, inputs, outputs and artifact lifecycles.</div>
-      </div>
-      <div class="hub-card" onclick="nav('function')" style="border-top-color:#4a6d8a">
-        <div class="hub-card-icon">◈</div>
-        <div class="hub-card-sub">EA Function on a Page</div>
-        <div class="hub-card-title">Architecture Function</div>
-        <div class="hub-card-desc">Architecture tiers, governance bodies and procedures, architect roles, domains, and the typical ratio of architects to IT staff.</div>
-      </div>
-      <div class="hub-card" onclick="nav('maturity')" style="border-top-color:#6a7b4f">
-        <div class="hub-card-icon">↑</div>
-        <div class="hub-card-sub">EA Maturity on a Page</div>
-        <div class="hub-card-title">Four Maturity Stages</div>
-        <div class="hub-card-desc">From no architectural planning to full enterprise-wide alignment — each stage's function, artifacts, processes, benefits and challenges.</div>
+
+    <!-- Artifact entry cards -->
+    <div class="hub-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:20px">
+      <div class="hub-card" onclick="nav('map')" style="border-top-color:#4a6d8a">
+        <div class="hub-card-icon">◫</div>
+        <div class="hub-card-title">Framework Map</div>
+        <div class="hub-card-desc">See all 28 artifacts positioned on Kotusev's 2x3 grid — Generic to Specific, Business to IT. Highlight by essentiality, process, focus, or lifecycle.</div>
       </div>
       <div class="hub-card" onclick="nav('grid')" style="border-top-color:#7a5f99">
         <div class="hub-card-icon">⬡</div>
-        <div class="hub-card-sub">EA Artifacts on a Page</div>
-        <div class="hub-card-title">28 EA Artifacts</div>
-        <div class="hub-card-desc">All artifact families — Considerations, Visions, Outlines, Standards, Landscapes and Designs — with format, audience and practical notes.</div>
+        <div class="hub-card-title">Explore All</div>
+        <div class="hub-card-desc">Browse all 28 artifacts with search and filters for focus, essentiality and lifecycle. Each artifact links to related artifacts and commonly confused ones.</div>
+      </div>
+      <div class="hub-card" onclick="nav('chooser')" style="border-top-color:#b45630">
+        <div class="hub-card-icon">◇</div>
+        <div class="hub-card-title">Find by Process</div>
+        <div class="hub-card-desc">Filter artifacts by EA process — Strategic Planning, Technology Optimisation, or Initiative Delivery — to see which artifacts belong to which process.</div>
       </div>
     </div>
+
+    <!-- Artifact families -->
+    <div class="ft">Artifact families</div>
+    <div class="fl" id="flist"></div>
+
+    <!-- Further topics -->
+    <div class="hub-further">
+      <div class="hub-further-hd">
+        <span class="hub-further-title">Further topics</span>
+        <span class="hub-further-badge">In development</span>
+      </div>
+      <div class="hub-further-desc">Early overviews of the other three Kotusev reference models. Content is present but not yet fully reviewed or polished.</div>
+      <div class="hub-further-cards">
+        <div class="hub-further-card" onclick="nav('practice')">
+          <span class="hub-further-icon">⟳</span>
+          <div>
+            <div class="hub-further-name">EA Practice</div>
+            <div class="hub-further-sub">Strategic Planning, Technology Optimisation, Initiative Delivery</div>
+          </div>
+        </div>
+        <div class="hub-further-card" onclick="nav('function')">
+          <span class="hub-further-icon">◈</span>
+          <div>
+            <div class="hub-further-name">EA Function</div>
+            <div class="hub-further-sub">Architecture tiers, governance bodies, architect domains</div>
+          </div>
+        </div>
+        <div class="hub-further-card" onclick="nav('maturity')">
+          <span class="hub-further-icon">↑</span>
+          <div>
+            <div class="hub-further-name">EA Maturity</div>
+            <div class="hub-further-sub">Four stages from no architecture to full enterprise alignment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <p class="hub-source">Based on Svyatoslav Kotusev's <a href="https://eaonapage.com" target="_blank" rel="noopener">EA on a Page</a> framework · <a href="https://www.sciencedirect.com/science/article/abs/pii/S0950584922000593" target="_blank" rel="noopener">CSVLOD taxonomy</a> · Kotusev et al., 2022</p>
+  </div>
+
+  <!-- MORE (Further topics landing) -->
+  <div class="v" id="v-more">
+    <div style="padding:28px 0 60px">
+      <button class="section-back" onclick="nav('home')">← Home</button>
+      <h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:24px;font-weight:400;margin-bottom:6px;color:var(--tx)">Further topics</h2>
+      <p style="font-size:13px;color:var(--tx3);margin-bottom:8px">Early overviews of three additional Kotusev reference models.</p>
+      <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--sf2);border:1px solid var(--bd);border-radius:6px;font-size:11px;color:var(--tx3);margin-bottom:28px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#a6882e;flex-shrink:0"></span>
+        In development — content is present but not yet fully reviewed
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+        <div class="hub-card" onclick="nav('practice')" style="border-top-color:#b45630">
+          <div class="hub-card-icon">⟳</div>
+          <div class="hub-card-sub">EA Practice on a Page</div>
+          <div class="hub-card-title">Three EA Processes</div>
+          <div class="hub-card-desc">Strategic Planning, Technology Optimisation, and Initiative Delivery — their goals, structures, inputs, outputs and artifact lifecycles.</div>
+        </div>
+        <div class="hub-card" onclick="nav('function')" style="border-top-color:#4a6d8a">
+          <div class="hub-card-icon">◈</div>
+          <div class="hub-card-sub">EA Function on a Page</div>
+          <div class="hub-card-title">Architecture Function</div>
+          <div class="hub-card-desc">Architecture tiers, governance bodies and procedures, architect roles, domains, and the typical ratio of architects to IT staff.</div>
+        </div>
+        <div class="hub-card" onclick="nav('maturity')" style="border-top-color:#6a7b4f">
+          <div class="hub-card-icon">↑</div>
+          <div class="hub-card-sub">EA Maturity on a Page</div>
+          <div class="hub-card-title">Four Maturity Stages</div>
+          <div class="hub-card-desc">From no architectural planning to full enterprise-wide alignment — each stage's function, artifacts, processes, benefits and challenges.</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- PRACTICE -->
   <div class="v" id="v-practice">
     <div class="practice-wrap">
-      <button class="section-back" onclick="nav('home')">← EA on a Page</button>
+      <button class="section-back" onclick="nav('more')">← Further topics</button>
       <h2>EA Practice on a Page</h2>
       <p class="sub">An aggregated view of the three processes constituting an EA practice, their interrelationships and properties.</p>
       <div id="practice-content"></div>
@@ -72,7 +133,7 @@
   <!-- MATURITY -->
   <div class="v" id="v-maturity">
     <div class="maturity-wrap">
-      <button class="section-back" onclick="nav('home')">← EA on a Page</button>
+      <button class="section-back" onclick="nav('more')">← Further topics</button>
       <h2>EA Maturity on a Page</h2>
       <p class="sub">An aggregated view of the maturity of an EA practice with its different stages and their essential properties.</p>
       <div class="maturity-note">This model is purely descriptive — it reflects typical historical paths of most organisations, but is not prescriptive of a mandatory sequence. In large organisations, different parts of their EA practices may be at different stages across their different divisions.</div>
@@ -83,7 +144,7 @@
   <!-- FUNCTION -->
   <div class="v" id="v-function">
     <div class="function-wrap">
-      <button class="section-back" onclick="nav('home')">← EA on a Page</button>
+      <button class="section-back" onclick="nav('more')">← Further topics</button>
       <h2>EA Function on a Page</h2>
       <p class="sub">An aggregated view of architecture functions in organisations with their positions and governance bodies.</p>
       <div id="function-content"></div>
